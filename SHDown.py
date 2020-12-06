@@ -1,5 +1,5 @@
-print('Requires a root acsess!')
 import sys
+import time
 
 def shutdown():
     current_os = platform.system()
@@ -16,7 +16,7 @@ def shutdown_sys(ind):
 		subprocess.call('halt')
 	if ind == 1:
 		subprocess.call('cmd /c shutdown.exe /s -t 0')
-import time
+
 def shutdown_time():
 	global cut_off
 	cut_off = input('Enter time in a valid format, e.g. 20:30 (in 24hours format!)\nThe programm will shutdown the computer when given time will appear: ')
@@ -38,11 +38,17 @@ def shutdown_time():
 	else:
 		return 0
 	return 1
+
+
+print('Requires a root acsess!')
+
 while shutdown_time() != 1:
 	None
 print('Timer has been set. If you want to stop it - simply close timer window')
 print('')
+
 current_time = time.localtime()
+
 while current_time.tm_hour != int(cut_off[0]) or current_time.tm_min != int(cut_off[1]):
 	current_time = time.localtime()
 	time.sleep(1)
@@ -76,11 +82,14 @@ while current_time.tm_hour != int(cut_off[0]) or current_time.tm_min != int(cut_
 		sys.stdout.flush()
 		print('')
 		print('Shutting down now...')
+
 shutdown()
+
 time.sleep(5)
+
 sys.stdout.write('\r')
 sys.stdout.flush()
-print('\n')
-print('Failed to shutdown')
-print('Check the root access')
+
+print('\n\nFailed to shutdown\nCheck the root access')
+
 time.sleep(3)
